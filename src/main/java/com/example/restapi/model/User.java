@@ -1,11 +1,24 @@
 package com.example.restapi.model;
 
+import javax.persistence.*;
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column
     private String firstname;
+
+    @Column
     private String lastname;
+
+    @Column
     private int age;
+
+    @Column
     private String occupation;
 
     public long getId() {
