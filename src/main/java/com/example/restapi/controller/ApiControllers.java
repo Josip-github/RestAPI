@@ -3,10 +3,7 @@ package com.example.restapi.controller;
 import com.example.restapi.model.User;
 import com.example.restapi.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,4 +29,14 @@ public class ApiControllers {
         return "Saved...";
     }
 
+    @PutMapping(value = "/update/{id}")
+    public String updateUser(@PathVariable long id, @RequestBody User user){
+        User updatedUser = userRepo.findById(id).get();
+        updatedUser.setFirstname(user.getFirstname());
+        updatedUser.setLastname(user.getLastname());
+        updatedUser.setOccupation(user.getOccupation());
+        updatedUser.setAge(user.getAge());
+        userRepo.save(updatedUser);
+        return "Updated...";
+    }
 }
